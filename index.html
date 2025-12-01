@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калкулатор за ресто EUR/BGN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6 flex items-center justify-center">
+    <div class="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+            Калкулатор за ресто
+        </h1>
+
+```
+    <div class="space-y-5">
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+                Платена сума (BGN)
+            </label>
+            <input
+                type="number"
+                id="paidAmount"
+                value="50"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="50"
+                step="0.01"
+            />
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+                Цена на услугата (EUR)
+            </label>
+            <input
+                type="number"
+                id="servicePrice"
+                value="16"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="16"
+                step="0.01"
+            />
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+                Обменен курс (EUR → BGN)
+            </label>
+            <input
+                type="number"
+                id="exchangeRate"
+                value="1.95583"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="1.95583"
+                step="0.00001"
+            />
+        </div>
+    </div>
+
+    <div class="mt-8 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl p-6 text-white">
+        <div class="mb-4">
+            <p class="text-sm opacity-90 mb-1">Цена в лева:</p>
+            <p class="text-2xl font-bold" id="priceInBGN">31.29 лв</p>
+        </div>
+        
+        <div class="border-t border-white border-opacity-30 pt-4">
+            <p class="text-sm opacity-90 mb-1">Ресто за връщане:</p>
+            <p class="text-3xl font-bold" id="change">18.71 лв</p>
+            <p class="text-lg mt-2 opacity-95" id="changeInEUR">(9.57 EUR)</p>
+        </div>
+    </div>
+
+    <div class="mt-6 text-center text-sm text-gray-500">
+        <p id="rateDisplay">1 EUR = 1.95583 BGN</p>
+    </div>
+</div>
+
+<script>
+    function calculateChange() {
+        const paid = parseFloat(document.getElementById('paidAmount').value) || 0;
+        const price = parseFloat(document.getElementById('servicePrice').value) || 0;
+        const rate = parseFloat(document.getElementById('exchangeRate').value) || 0;
+        
+        const priceInBGN = price * rate;
+        const change = paid - priceInBGN;
+        const changeInEUR = rate > 0 ? change / rate : 0;
+        
+        document.getElementById('priceInBGN').textContent = priceInBGN.toFixed(2) + ' лв';
+        document.getElementById('change').textContent = change.toFixed(2) + ' лв';
+        document.getElementById('changeInEUR').textContent = '(' + changeInEUR.toFixed(2) + ' EUR)';
+        document.getElementById('rateDisplay').textContent = '1 EUR = ' + rate + ' BGN';
+    }
+
+    // Добавяме event listeners за автоматично изчисление
+    document.getElementById('paidAmount').addEventListener('input', calculateChange);
+    document.getElementById('servicePrice').addEventListener('input', calculateChange);
+    document.getElementById('exchangeRate').addEventListener('input', calculateChange);
+
+    // Първоначално изчисление
+    calculateChange();
+</script>
+```
+
+</body>
+</html>
