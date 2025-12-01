@@ -65,8 +65,8 @@
         
         <div class="border-t border-white border-opacity-30 pt-4">
             <p class="text-sm opacity-90 mb-1">Ресто за връщане:</p>
-            <p class="text-3xl font-bold" id="change">18.71 лв</p>
-            <p class="text-lg mt-2 opacity-95" id="changeInEUR">(9.57 EUR)</p>
+            <p class="text-3xl font-bold" id="changeInEUR">9.57 EUR</p>
+            <p class="text-lg mt-2 opacity-95" id="change">(18.71 лв)</p>
         </div>
     </div>
 
@@ -86,8 +86,8 @@
         const changeInEUR = rate > 0 ? change / rate : 0;
         
         document.getElementById('priceInBGN').textContent = priceInBGN.toFixed(2) + ' лв';
-        document.getElementById('change').textContent = change.toFixed(2) + ' лв';
-        document.getElementById('changeInEUR').textContent = '(' + changeInEUR.toFixed(2) + ' EUR)';
+        document.getElementById('changeInEUR').textContent = changeInEUR.toFixed(2) + ' EUR';
+        document.getElementById('change').textContent = '(' + change.toFixed(2) + ' лв)';
         document.getElementById('rateDisplay').textContent = '1 EUR = ' + rate + ' BGN';
     }
 
